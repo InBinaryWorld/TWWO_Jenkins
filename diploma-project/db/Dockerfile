@@ -1,0 +1,2 @@
+ARG PG_VERSION=13
+FROM postgres:$PG_VERSION

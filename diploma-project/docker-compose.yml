@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  database:
+    build: ./db
+    container_name: database
+    ports:
+      - "5432:5432"
+    networks:
+      - internal-net
+    volumes:
+      - /appDB/data:/var/lib/postgresql/data
+    env_file:
+      - db-variables.env
+  backend:
+    build: ./backend
+    container_name: backend-app
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - internal-net
+    depends_on:
+      - database
+    command: bash -c 'sleep 1m && catalina.sh run'
+    env_file:
+      - backend-variables.env
+  frontend-app:
+    build: ./frontend
+    container_name: frontend-app
+    ports:
+      - "80:4200"
+    depends_on:
+      - backend
+networks:
+  internal-net:
+    driver: bridge
