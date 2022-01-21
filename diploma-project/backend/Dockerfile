@@ -12,6 +12,8 @@ RUN cp -rf ./tomcat/web.xml /usr/local/tomcat/conf/web.xml
 
 RUN dos2unix ./gradlew
 
+RUN chmod +x ./gradlew bootWar
+
 RUN ./gradlew bootWar
 
 RUN find ./build/libs/ -name '*.war' -exec cp "{}" "/tmp/api.war"  \;
