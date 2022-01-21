@@ -12,7 +12,7 @@ RUN cp -rf ./tomcat/web.xml /usr/local/tomcat/conf/web.xml
 
 RUN dos2unix ./gradlew
 
-RUN chmod +x ./gradlew bootWar
+RUN chmod +x ./gradlew
 
 RUN ./gradlew bootWar
 
