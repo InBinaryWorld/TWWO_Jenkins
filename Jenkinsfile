@@ -1,6 +1,5 @@
 pipeline {
   agent any
-    
   stages {
     stage('Cloning Git') {
       steps {
@@ -23,6 +22,12 @@ pipeline {
     stage('Build frontend image') {
       steps {
          sh 'docker build -t frontend-image ./diploma-project/frontend'
+      }
+    }
+	
+    stage('List images') {
+      steps {
+         sh 'docker images'
       }
     }  
   }
