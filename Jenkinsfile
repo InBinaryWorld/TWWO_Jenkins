@@ -9,25 +9,27 @@ pipeline {
      
     stage('Build database Image') {
       steps {
-         sh 'docker build -t database-image ./diploma-project/db'
+         sh 'docker build -t inbinaryworld/database:latest ./diploma-project/db'
       }
     }  
      
     stage('Build backend image') {
       steps {
-         sh 'docker build -t backend-image ./diploma-project/backend'
+         sh 'docker build -t inbinaryworld/backend-image:latest ./diploma-project/backend'
       }
     }  
      
     stage('Build frontend image') {
       steps {
-         sh 'docker build -t frontend-image ./diploma-project/frontend'
+         sh 'docker build -t inbinaryworld/frontend-image:latest ./diploma-project/frontend'
       }
     }
 	
-    stage('List images') {
+    stage('Push images') {
       steps {
-         sh 'docker images'
+         sh 'docker push inbinaryworld/database:latest'
+         sh 'docker push inbinaryworld/backend-image:latest'
+         sh 'docker push inbinaryworld/frontend-image:latest'
       }
     }  
   }
